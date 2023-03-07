@@ -30,7 +30,7 @@ export default function LoginModal() {
           px: "20px",
           py: "20px",
           position: "relative",
-          bgcolor: "white",
+          bgcolor: "modal.default",
           border: "2px black solid",
         }}
       >

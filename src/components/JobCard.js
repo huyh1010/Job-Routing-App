@@ -6,10 +6,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 import BasicChips from "./SkillsList";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../authorization/auth";
 
 export default function JobCard({ job }) {
+  let location = useLocation();
   const navigate = useNavigate();
   const auth = useAuth();
 
@@ -60,6 +61,7 @@ export default function JobCard({ job }) {
             "&:hover": { backgroundColor: "#1976d2" },
           }}
           onClick={() => handleOpen(job.id)}
+          state={{ backgroundLocation: location }}
         >
           Learn More
         </Button>

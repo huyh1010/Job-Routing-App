@@ -10,7 +10,11 @@ export default function BasicChips({ job }) {
         <Chip
           label={skill}
           size="small"
-          sx={{ fontSize: "8px", bgcolor: "secondary.main" }}
+          sx={{
+            fontSize: "8px",
+            bgcolor: "secondary.main",
+            color: "text1.primary",
+          }}
         />
       ))}
     </Stack>

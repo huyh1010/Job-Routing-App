@@ -9,11 +9,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Button } from "@mui/material";
 import { useAuth } from "../authorization/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 
 function LoginForm() {
+  let location = useLocation();
+
   const defaultValues = {
     username: "anonymous user",
     password: "user123",
@@ -28,10 +30,11 @@ function LoginForm() {
 
   const auth = useAuth();
   const navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/";
 
   const handleLogin = () => {
     auth.login(defaultValues.username);
-    navigate("/");
+    navigate(from, { replace: true });
   };
 
   return (
@@ -59,6 +62,10 @@ function LoginForm() {
               variant="outlined"
               fullWidth
               {...field}
+              inputProps={{ style: { color: "black" } }}
+              InputLabelProps={{
+                style: { color: "text.primary", fontWeight: "bold" },
+              }}
             />
           )}
         />
@@ -73,6 +80,10 @@ function LoginForm() {
                 bgcolor: "secondary.main",
               }}
               label="Password"
+              inputProps={{ style: { color: "black" } }}
+              InputLabelProps={{
+                style: { color: "text.primary", fontWeight: "bold" },
+              }}
               type={showPassword ? "text" : "password"}
               fullWidth
               variant="outlined"
@@ -81,6 +92,7 @@ function LoginForm() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
+                      sx={{ color: "text1.primary" }}
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
                       edge="end"

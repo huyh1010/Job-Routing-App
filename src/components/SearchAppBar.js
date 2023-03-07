@@ -14,6 +14,10 @@ import { useAuth } from "../authorization/auth";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import Switch from "@mui/material/Switch";
+
+const label = { inputProps: { "aria-label": "Size switch demo" } };
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -53,7 +57,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({ searchParams, setSearchParams }) {
+export default function SearchAppBar({
+  searchParams,
+  setSearchParams,
+  setIsDark,
+  isDark,
+}) {
   const navigate = useNavigate();
   const auth = useAuth();
   const handleClickLogin = () => {
@@ -65,6 +74,9 @@ export default function SearchAppBar({ searchParams, setSearchParams }) {
     });
   };
 
+  const handleMode = () => {
+    setIsDark(!isDark);
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -82,12 +94,18 @@ export default function SearchAppBar({ searchParams, setSearchParams }) {
                 display: { xs: "none", sm: "block" },
                 mr: 2,
                 mt: 0.3,
-                color: "black",
+                color: "text.primary",
               }}
             >
               Job Routing
             </Typography>
-            <Search sx={{ display: "flex", bgcolor: "secondary.main" }}>
+            <Search
+              sx={{
+                display: "flex",
+                bgcolor: "secondary.main",
+                color: "text1.primary",
+              }}
+            >
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -106,6 +124,7 @@ export default function SearchAppBar({ searchParams, setSearchParams }) {
                 sx={{ width: 250 }}
               />
             </Search>
+            <Switch {...label} defaultChecked onChange={handleMode} />
           </Box>
 
           {!auth.user ? (
@@ -159,7 +178,7 @@ export default function SearchAppBar({ searchParams, setSearchParams }) {
             <MoreVertIcon
               sx={{
                 display: { xs: "flex", sm: "flex", md: "none", lg: "none" },
-                color: "black",
+                color: "text.primary",
               }}
             />
           </Box>

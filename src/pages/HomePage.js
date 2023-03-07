@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 import SearchAppBar from "../components/SearchAppBar";
 import { useSearchParams } from "react-router-dom";
 
-function HomePage() {
+function HomePage({ setIsDark, isDark, theme }) {
   const [jobsInfo, setJobsInfo] = useState([]);
   const pageSize = 5;
   const totalPage = Math.round(jobsInfo.length / pageSize);
@@ -40,6 +40,9 @@ function HomePage() {
       <SearchAppBar
         searchParams={searchParams}
         setSearchParams={setSearchParams}
+        setIsDark={setIsDark}
+        isDark={isDark}
+        theme={theme}
       />
       <Container>
         <Grid container spacing={2} mt={2} wrap={"wrap"}>

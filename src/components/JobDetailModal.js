@@ -50,7 +50,7 @@ export default function JobDetailModal() {
           height: "300px",
           textAlign: "center",
           border: "2px solid",
-          bgcolor: "white",
+          bgcolor: "modal.default",
         }}
         p={1}
       >
@@ -80,15 +80,17 @@ export default function JobDetailModal() {
         </Typography>
         <Stack direction="row" spacing={1} mt={1} justifyContent={"center"}>
           {job.skills &&
-            job.skills
-              .slice(0, 4)
-              .map((skill) => (
-                <Chip
-                  label={skill}
-                  size="medium"
-                  sx={{ fontSize: "8px", bgcolor: "secondary.main" }}
-                />
-              ))}
+            job.skills.slice(0, 4).map((skill) => (
+              <Chip
+                label={skill}
+                size="medium"
+                sx={{
+                  fontSize: "8px",
+                  bgcolor: "secondary.main",
+                  color: "text1.primary",
+                }}
+              />
+            ))}
         </Stack>
         <Typography
           sx={{ display: "block", fontWeight: "bold" }}
