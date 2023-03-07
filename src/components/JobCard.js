@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 import BasicChips from "./SkillsList";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../authorization/auth";
 
 export default function JobCard({ job }) {
@@ -14,10 +14,10 @@ export default function JobCard({ job }) {
   const navigate = useNavigate();
   const auth = useAuth();
 
-  const handleOpen = (id) => {
-    if (auth.user) return navigate(`/job/${id}`);
-    if (!auth.user) return navigate("/login");
-  };
+  // const handleOpen = (id) => {
+  //   if (auth.user) return navigate(`/job/${id}`);
+  //   if (!auth.user) return navigate("/login");
+  // };
 
   return (
     <Card
@@ -54,13 +54,15 @@ export default function JobCard({ job }) {
       </CardContent>
       <CardActions>
         <Button
+          component={Link}
           size="small"
           sx={{
             margin: "auto",
             bgcolor: "#1976d2",
             "&:hover": { backgroundColor: "#1976d2" },
           }}
-          onClick={() => handleOpen(job.id)}
+          to={`job/${job.id}`}
+          // onClick={() => handleOpen(job.id)}
           state={{ backgroundLocation: location }}
         >
           Learn More

@@ -13,7 +13,7 @@ import { useState } from "react";
 
 function App() {
   let location = useLocation();
-  // const auth = useAuth();
+  const auth = useAuth();
   let state = location.state;
   const [isDark, setIsDark] = useState(false);
   const theme = createTheme({
@@ -47,13 +47,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AuthProvider>
-        <Routes
-          location={
-            location.state?.backgroundLocation
-              ? location.state.backgroundLocation
-              : location
-          }
-        >
+        <Routes location={state?.backgroundLocation || location}>
           <Route
             path="/"
             element={
@@ -72,9 +66,13 @@ function App() {
             />
           </Route>
         </Routes>
-        {state && (
+        {state?.backgroundLocation ? (
           <Routes>
             <Route path="/job/:id" element={<JobDetailModal />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/job/:id" element={<LoginModal />} />
           </Routes>
         )}
       </AuthProvider>
