@@ -6,13 +6,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 import BasicChips from "./SkillsList";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../authorization/auth";
+import { Link, useLocation } from "react-router-dom";
 
 export default function JobCard({ job }) {
   let location = useLocation();
-  const navigate = useNavigate();
-  const auth = useAuth();
 
   // const handleOpen = (id) => {
   //   if (auth.user) return navigate(`/job/${id}`);

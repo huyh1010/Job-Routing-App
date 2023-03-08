@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { AuthProvider, useAuth } from "./authorization/auth";
+import { AuthProvider } from "./authorization/auth";
 import LoginModal from "./components/LoginModal";
 import JobDetailModal from "./components/JobDetailModal";
 import RequireAuth from "./authorization/RequireAuth";
@@ -13,7 +13,7 @@ import { useState } from "react";
 
 function App() {
   let location = useLocation();
-  const auth = useAuth();
+
   let state = location.state;
   const [isDark, setIsDark] = useState(false);
   const theme = createTheme({
@@ -47,34 +47,28 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AuthProvider>
-        <Routes location={state?.backgroundLocation || location}>
+        <Routes location={state?.from?.state?.backgroundLocation || location}>
           <Route
             path="/"
             element={
               <HomePage setIsDark={setIsDark} isDark={isDark} theme={theme} />
             }
-          >
-            <Route path="/login" element={<LoginModal />} />
-
-            <Route
-              path="/job/:id"
-              element={
-                <RequireAuth>
-                  <JobDetailModal />
-                </RequireAuth>
-              }
-            />
-          </Route>
+          />
+          <Route path="/login" element={<HomePage />} />
+          <Route path="/job/:id" element={<HomePage />} />
         </Routes>
-        {state?.backgroundLocation ? (
-          <Routes>
-            <Route path="/job/:id" element={<JobDetailModal />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route path="/job/:id" element={<LoginModal />} />
-          </Routes>
-        )}
+        <Routes>
+          <Route path="/login" element={<LoginModal />} />
+
+          <Route
+            path="/job/:id"
+            element={
+              <RequireAuth>
+                <JobDetailModal />
+              </RequireAuth>
+            }
+          />
+        </Routes>
       </AuthProvider>
     </ThemeProvider>
   );

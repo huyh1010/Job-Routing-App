@@ -124,7 +124,12 @@ export default function SearchAppBar({
                 sx={{ width: 250 }}
               />
             </Search>
-            <Switch {...label} defaultChecked onChange={handleMode} />
+            <Switch
+              {...label}
+              defaultChecked
+              onChange={handleMode}
+              color="warning"
+            />
           </Box>
 
           {!auth.user ? (
